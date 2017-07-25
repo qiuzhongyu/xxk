@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<head>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1{
+				width: 300px;
+				margin: 50px auto;
+				text-align: center;
+			}
+			#div1>div{
+				border: 1px solid yellow;
+				display: none;
+				height: 300px;
+				background: orangered;
+				line-height: 300px;
+				font-size: 50px;
+			}
+			input{
+				width: 40px;
+				height: 40px;
+			}
+			.active {
+				background: red;
+				border: none;
+				color: white;
+				width: 40px;
+				height: 40px;
+			}
+		</style>
+		<script>
+			window.onload = function() {
+				var t1 = new Tab("div1");
+				t1.init();
+			}
+
+			function Tab(id) {
+				this.Parent = document.getElementById(id);
+				this.Ipt = this.Parent.getElementsByTagName("input");
+				this.Div = this.Parent.getElementsByTagName("div");
+				this.iNow = 0;
+			}
+
+			Tab.prototype.init = function() {
+				var This = this;
+				for(var i = 0; i < this.Ipt.length; i++) {
+					this.Ipt[i].index = i;
+					this.Ipt[i].onclick = function() {
+						This.change(this);
+					}
+				}
+			}
+
+			Tab.prototype.change = function(obj) {
+				for(var i = 0; i < this.Ipt.length; i++) {
+					this.Ipt[i].className = "";
+					this.Div[i].style.display = "none";
+				}
+				obj.className = "active";
+				this.Div[obj.index].style.display = "block";
+			}
+		</script>
+	</head>
+
+	<body>
+		
+		
+		
+		<div id="div1">
+			<input class="active" type="button" value="1">
+			<input type="button" value="2">
+			<input type="button" value="3">
+			<div style="display:block">11111</div>
+			<div>22222</div>
+			<div>33333</div>
+		</div>
+	</body>
+
+	</html>
